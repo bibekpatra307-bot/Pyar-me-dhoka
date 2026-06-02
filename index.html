@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>बेवफाई के धोखे – Bibek Patra | प्रेम जाल से बचाव पुस्तक</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #c2b59b;
+            background-image: radial-gradient(circle at 10% 20%, rgba(160, 140, 110, 0.2) 2%, transparent 2.5%),
+                              radial-gradient(circle at 80% 70%, rgba(100, 70, 40, 0.15) 1.5%, transparent 2%);
+            background-size: 40px 40px, 30px 30px;
+            font-family: 'Tiro Devanagari Hindi', 'Crimson Pro', serif;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* main book appearance */
+        .book {
+            max-width: 1000px;
+            width: 100%;
+            background: #fffef7;
+            box-shadow: 0 30px 45px -20px rgba(0,0,0,0.5), 0 0 0 1px #e9ddce, 8px 8px 20px rgba(0,0,0,0.1);
+            border-radius: 12px 8px 8px 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* paper texture */
+        .book {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="1" stitchTiles="stitch"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.04"/></svg>');
+            background-repeat: repeat;
+        }
+
+        /* cover styling */
+        .cover {
+            background: linear-gradient(135deg, #2a241a 0%, #3a2e22 100%);
+            color: #f3e7d3;
+            text-align: center;
+            padding: 3.5rem 2rem;
+            border-bottom: 8px solid #c0a16b;
+            position: relative;
+        }
+        .cover h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 0 #4a3520;
+        }
+        .cover h3 {
+            font-size: 1.4rem;
+            margin: 1.2rem 0 0.5rem;
+            font-weight: 400;
+            font-style: italic;
+            color: #e9d5b5;
+        }
+        .cover .author {
+            margin-top: 2.2rem;
+            font-size: 1.3rem;
+            border-top: 1px solid #b48c54;
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        .cover .tagline {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #dbbd8c;
+        }
+
+        /* table of contents */
+        .toc {
+            background: #faf5ea;
+            padding: 2rem 2rem;
+            border-bottom: 1px solid #e2d3bf;
+        }
+        .toc h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            border-left: 6px solid #aa7744;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Crimson Pro', serif;
+        }
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+            gap: 0.4rem 1.8rem;
+        }
+        .toc a {
+            text-decoration: none;
+            color: #5c3e24;
+            font-weight: 500;
+            display: block;
+            padding: 0.3rem 0;
+            border-bottom: 1px dotted #ebddcd;
+            transition: 0.2s;
+        }
+        .toc a:hover {
+            color: #b2621a;
+            transform: translateX(6px);
+        }
+
+        /* chapter style — like book pages */
+        .chapter {
+            padding: 2.2rem 2.8rem;
+            border-bottom: 1px solid #eedfcb;
+            background: #fffefa;
+        }
+        .chapter h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #6d4524;
+            border-bottom: 2px solid #e7cfb0;
+            display: inline-block;
+            padding-bottom: 0.2rem;
+            margin-bottom: 1.2rem;
+            font-family: 'Crimson Pro', serif;
+        }
+        .chapter h3 {
+            margin: 1.4rem 0 0.7rem;
+            color: #9b5e2a;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .chapter p {
+            margin-bottom: 1rem;
+            text-align: justify;
+            line-height: 1.65;
+            font-size: 1.05rem;
+        }
+        .chapter ul, .chapter ol {
+            margin: 0.8rem 0 1rem 1.8rem;
+        }
+        .chapter li {
+            margin-bottom: 0.45rem;
+            line-height: 1.5;
+        }
+        /* dropcap first letter */
+        .chapter > p:first-of-type:first-letter {
+            font-size: 3.2rem;
+            font-weight: 700;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.5rem;
+            color: #b4581a;
+            font-family: 'Crimson Pro', serif;
+        }
+        .redflag {
+            background: #fff0e6;
+            border-left: 6px solid #c53a1f;
+            padding: 0.8rem 1.3rem;
+            margin: 1.3rem 0;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+        .safetytip {
+            background: #eef6eb;
+            border-left: 6px solid #2a7f49;
+            padding: 0.8rem 1.3rem;
+            margin: 1.3rem 0;
+            border-radius: 12px;
+        }
+        .casestudy {
+            background: #fdf0e2;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            margin: 1.2rem 0;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+            border: 1px solid #eedbc8;
+        }
+        .page-number {
+            text-align: right;
+            font-size: 0.75rem;
+            color: #bc8f63;
+            margin-top: 1.8rem;
+            border-top: 1px solid #f0e2d2;
+            padding-top: 0.5rem;
+            font-family: monospace;
+        }
+        footer {
+            background: #262119;
+            color: #e2cfb5;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+        }
+        .btn-up {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #8b5a2e;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 18px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+            z-index: 99;
+            transition: 0.2s;
+        }
+        .btn-up:hover {
+            background: #aa6d36;
+        }
+        @media (max-width: 650px) {
+            .chapter {
+                padding: 1.5rem;
+            }
+            .cover h1 {
+                font-size: 1.8rem;
+            }
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="book">
+    <!-- COVER PAGE -->
+    <div class="cover">
+        <h1>📖 बेवफाई के धोखे</h1>
+        <h3>आधे रास्ते छोड़ने वाली लड़कियों को पहचाने, समझे और बचें</h3>
+        <div class="author">✍️ लेखक : Bibek Patra</div>
+        <div class="tagline">“जैन जी” और हर संवेदनशील युवक के लिए सुरक्षा कवच</div>
+    </div>
+
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc">
+        <h2>📚 विषय-सूची</h2>
+        <div class="toc-grid">
+            <a href="#preface">प्रस्तावना – क्यों यह पुस्तक जरूरी है?</a>
+            <a href="#ch1">1. “कब” – जाल बिछने के शुरुआती घंटे</a>
+            <a href="#ch2">2. “क्यों” – लड़कियाँ आधे रास्ते क्यों छोड़ती हैं?</a>
+            <a href="#ch3">3. “कैसे” – फंसाने के 7 चरण</a>
+            <a href="#ch4">4. “किस लिए” – छिपे उद्देश्य</a>
+            <a href="#ch5">5. “जैन जी” विशेष – क्यों आप अधिक असुरक्षित?</a>
+            <a href="#ch6">6. 20 चौकन्ने संकेत (Red Flags)</a>
+            <a href="#ch7">7. बचाव के 15 सुनहरे नियम</a>
+            <a href="#ch8">8. मानसिक मजबूती – आत्मरक्षा की नींव</a>
+            <a href="#ch9">9. रियल केस स्टडीज (5 सच्ची कहानियाँ)</a>
+            <a href="#ch10">10. निष्कर्ष – सही प्यार की पहचान</a>
+            <a href="#appendix">परिशिष्ट – हेल्पलाइन, परामर्श</a>
+        </div>
+    </div>
+
+    <!-- प्रस्तावना -->
+    <div class="chapter" id="preface">
+        <h2>प्रस्तावना</h2>
+        <p>“प्रेम में धोखा” आज के युग की सबसे बड़ी मानसिक विपत्ति है। लाखों युवा रातों-रात टूट जाते हैं, जब उनकी प्रेमिका बिना कोई ठोस कारण बताए रिश्ता तोड़ देती है। यह पुस्तक विशेष रूप से संवेदनशील, सीधे-साधे लड़कों (जिन्हें हम ‘जैन जी’ कहते हैं) के लिए लिखी गई है, ताकि वे समय रहते धोखे की गंध पहचान सकें।</p>
+        <p>Bibek Patra ने अपने अनुभवों और सैकड़ों पीड़ित युवकों के साक्षात्कार के आधार पर यह मार्गदर्शिका तैयार की है। इस किताब में 20 रेड फ्लैग, 15 बचाव नियम और 5 केस स्टडी के माध्यम से आपको सतर्क किया गया है। याद रखें – हर लड़की बुरी नहीं होती, लेकिन समय रहते धोखे को पहचानना आपकी अपनी सुरक्षा है।</p>
+        <div class="page-number">पृष्ठ 1-4</div>
+    </div>
+
+    <!-- अध्याय 1 -->
+    <div class="chapter" id="ch1">
+        <h2>1. “कब” – जाल बिछने के शुरुआती घंटे</h2>
+        <p>धोखेबाज लड़कियाँ या तो बहुत जल्दी अटैच हो जाती हैं या फिर बहुत देर से दिल खोलती हैं। लेकिन जाल का निर्माण हमेशा पहले 30 दिनों में शुरू होता है। पहली मुलाकात से लेकर डेट तक – जब कोई अचानक आप पर अत्यधिक ध्यान देने लगे, हर पोस्ट पर लाइक और कमेंट करे, आपकी हर बात में दिलचस्पी दिखाए – यह ‘लव बॉम्बिंग’ है।</p>
+        <h3>1.1 जब “कमिटमेंट” का झूठा वादा करे</h3>
+        <p>बिना समय दिए “तुमसे शादी करूंगी”, “तुम मेरी जिंदगी हो” जैसे शब्द बोलना – अगर यह पहले महीने में ही हो, तो संभल जाइए। असली प्यार जल्दबाजी नहीं दिखाता।</p>
+        <div class="redflag">⚠️ खतरे का संकेत: जो अति मीठा बोले, वही कड़वा करके जाएगा।</div>
+        <div class="page-number">पृष्ठ 5-20</div>
+    </div>
+
+    <!-- अध्याय 2 -->
+    <div class="chapter" id="ch2">
+        <h2>2. “क्यों” – लड़कियाँ आधे रास्ते क्यों छोड़ती हैं?</h2>
+        <p>हर धोखे के पीछे एक वजह होती है। कुछ लड़कियाँ खुद टूटी होती हैं, कुछ बस टाइमपास करती हैं, तो कुछ सोशल मीडिया पर वैलिडेशन ढूंढती हैं। मुख्य कारण:</p>
+        <ul>
+            <li><strong>बोरियत और इमोशनल गेम्स</strong> – उन्हें मानसिक उत्तेजना चाहिए, स्थायी रिश्ता नहीं।</li>
+            <li><strong>सोशल मीडिया का नशा</strong> – जैसे ही नया ऑप्शन मिलता है, पुराना फेंक दिया जाता है।</li>
+            <li><strong>पिछले रिश्तों का बदला</strong> – कोई लड़का उनके साथ ऐसा कर चुका होता है, तो वह दूसरों पर उतारती हैं।</li>
+            <li><strong>सुविधा भरा साथ</strong> – जब तक आप गिफ्ट, पैसे, मदद करते रहो, साथ निभाती हैं।</li>
+        </ul>
+        <div class="page-number">पृष्ठ 21-40</div>
+    </div>
+
+    <!-- अध्याय 3 -->
+    <div class="chapter" id="ch3">
+        <h2>3. “कैसे” – फंसाने के 7 चरण</h2>
+        <p>धोखे की कला सात सीढ़ियों पर चलती है:</p>
+        <ol>
+            <li><strong>एक्सीडेंटल छेड़खानी</strong> – “क्या तुम्हारी कमीज अच्छी है?” “तुम अकेले क्यों हो?”</li>
+            <li><strong>स्पेशल फील कराना</strong> – “तुम बाकी लड़कों से अलग हो”</li>
+            <li><strong>धीरे-धीरे अलग-थलग करना</strong> – तुम्हारे दोस्तों और परिवार से दूरी बनवाना</li>
+            <li><strong>भावनात्मक ब्लैकमेल</strong> – “अगर तुमने ऐसा नहीं किया तो मैं चली जाऊंगी”</li>
+            <li><strong>गैसलाइटिंग</strong> – तुम्हें गलत साबित करना, अपनी गलती को तुमपर थोपना</li>
+            <li><strong>दूरी बनाना व वन-साइडेड फाइट</strong> – बिना कारण झगड़ा करके दूरी बनाना</li>
+            <li><strong>अचानक ब्रेकअप</strong> – “मैं तुम्हारे लायक नहीं”, “टाइम नहीं” – बिना जवाब के चले जाना</li>
+        </ol>
+        <div class="page-number">पृष्ठ 41-65</div>
+    </div>
+
+    <!-- अध्याय 4 -->
+    <div class="chapter" id="ch4">
+        <h2>4. “किस लिए” – छिपे उद्देश्य</h2>
+        <p>सिर्फ दिल टूटने का दर्द नहीं, कई बार यह जानबूझकर किया गया मानसिक अत्याचार होता है। मुख्य उद्देश्य:</p>
+        <ul>
+            <li><strong>अहंकार तृप्ति</strong> – यह जानना कि “कितने लड़के मेरे पीछे पागल हैं”</li>
+            <li><strong>सोशल स्टेटस</strong> – तुम्हारे साथ फोटो डालकर हैंडसम बॉयफ्रेंड दिखाना, फिर नया ढूंढना</li>
+            <li><strong>आर्थिक लाभ</strong> – महंगे गिफ्ट, कैश लोन, शॉपिंग बिल्स</li>
+            <li><strong>अपनी इनसिक्योरिटी मिटाना</strong> – वो खुद को अट्रैक्टिव न समझती हों, तो तुमसे एडमिरेशन लेना</li>
+        </ul>
+        <div class="page-number">पृष्ठ 66-85</div>
+    </div>
+
+    <!-- अध्याय 5 -->
+    <div class="chapter" id="ch5">
+        <h2>5. “जैन जी” विशेष – क्यों आप अधिक असुरक्षित?</h2>
+        <p>जैन जी यानी अच्छे संस्कार वाला, माँ-बाप की इज्जत करने वाला, दिल का साफ और ईमानदार लड़का। यही गुण उसे धोखे का शिकार बनाते हैं क्योंकि वह किसी में बुराई नहीं देखता।</p>
+        <ul>
+            <li>अति विश्वास करने वाले आसानी से झाँसे में आ जाते हैं।</li>
+            <li>वे “परमिस” को बहुत गंभीरता से लेते हैं, जबकि सामने वाला मजाक बना रहता है।</li>
+            <li>धार्मिक/सांस्कृतिक पृष्ठभूमि के कारण वे जल्दी शादी का सोच लेते हैं, ठगी होती है।</li>
+        </ul>
+        <p><strong>समाधान:</strong> दयालु बने, लेकिन सतर्क बने। प्रेम में अंधा नहीं, आँखें खोलकर प्यार कीजिए।</p>
+        <div class="page-number">पृष्ठ 86-105</div>
+    </div>
+
+    <!-- अध्याय 6 – 20 Red Flags -->
+    <div class="chapter" id="ch6">
+        <h2>6. 20 चौकन्ने संकेत (Red Flags)</h2>
+        <p>यदि नीचे दिए गए 5 या उससे अधिक लक्षण उसमें दिखें – तुरंत सतर्क हो जाएँ:</p>
+        <ol>
+            <li>आपका टाइम टेबल नियंत्रित करे</li>
+            <li>आपके दोस्तों और परिवार से दूर रखने की कोशिश करे</li>
+            <li>निजी तस्वीरें भेजने या बदले में लेने का दबाव</li>
+            <li>आपके सामने दूसरे लड़कों की तारीफ करे – ईर्ष्या जगाने के लिए</li>
+            <li>हर दूसरी बात पर “मेरा एक्स” का जिक्र</li>
+            <li>अपने अतीत के बारे में बात करने से बचे</li>
+            <li>बिना कारण ‘सीन’ दे (ignore करना)</li>
+            <li>गिफ्ट मांगना, फिर उसके बाद प्यार में कमी</li>
+            <li>कभी पैसे उधार मांगे और लौटाने की बात न करे</li>
+            <li>आपकी भावनाओं पर हँसे या उन्हें छोटा समझे</li>
+            <li>आपकी उपलब्धियों से जलन दिखाए</li>
+            <li>पब्लिक में गले लगना पसंद हो लेकिन प्राइवेट में इग्नोर</li>
+            <li>तुरंत सेक्स की बात करे – “अगर प्यार है तो दिखाओ”</li>
+            <li>अपने दोस्तों से मिलवाने से इनकार</li>
+            <li>अकाउंट्स प्राइवेट हों और अन्य लड़कों से फ्लर्ट</li>
+            <li>आपको ‘टॉक्सिक’ कहकर गैसलाइट करे</li>
+            <li>हर बात पर पहले हाँ, फिर बाद में उलट जाए</li>
+            <li>ब्रेकअप करके फिर से वापस आ जाए (कम से कम दो बार)</li>
+            <li>सोशल मीडिया पर आपको टैग न करे, पर फिर भी ‘इन लव’ दिखे</li>
+            <li>कभी अपने माता-पिता से आपका परिचय कराने को तैयार न हो</li>
+        </ol>
+        <div class="redflag">याद रखें – प्यार में अंधा नहीं, सतर्क बनें। 10+ फ्लैग मतलब तुरंत दूरी।</div>
+        <div class="page-number">पृष्ठ 106-130</div>
+    </div>
+
+    <!-- अध्याय 7 – 15 बचाव नियम -->
+    <div class="chapter" id="ch7">
+        <h2>7. बचाव के 15 सुनहरे नियम</h2>
+        <ul>
+            <li><strong>3 महीने का अवलोकन नियम</strong> – कम से कम 3 महीने बिना भावनात्मक निवेश के व्यवहार देखें।</li>
+            <li><strong>सार्वजनिक जगहों पर मिलें</strong> – पहले 2 महीने एकांत में न जाएँ।</li>
+            <li><strong>आर्थिक मदद से बचें</strong> – जब तक 6 महीने का गहरा विश्वास न हो, पैसे न दें।</li>
+            <li><strong>सोशल मीडिया डीप एनालिसिस</strong> – पुरानी टैग फोटो, कमेंट, कॉमन फ्रेंड्स से जानकारी लें।</li>
+            <li><strong>एक बार ब्रेकअप – तो फिर वापस न लें</strong> – 90% बार फिर से धोखा देती हैं।</li>
+            <li><strong>परमिशन-मैप तकनीक</strong> – उसके एक-दो करीबी दोस्तों से राय लें (चुपके से)।</li>
+            <li><strong>अपनी बाउंड्री बनाएँ</strong> – “मैं यह नहीं करूँगा” कहने से न डरें।</li>
+            <li><strong>स्क्रीनशॉट रखें</strong> – जरूरत पड़ने पर सबूत के लिए।</li>
+            <li><strong>एक भरोसेमंद मित्र को बताएँ</strong> – अकेले न रहें।</li>
+            <li><strong>हरकतों पर ध्यान दें, बातों पर नहीं</strong> – बोलना सस्ता है।</li>
+            <li><strong>जल्दी ‘आई लव यू’ कहने वालों से दूरी</strong></li>
+            <li><strong>अपनी सफलता पहले रखें</strong> – पढ़ाई, नौकरी, शौक पीछे न करें।</li>
+            <li><strong>अंतर्ज्ञान पर भरोसा करें</strong> – दिल कहे कुछ गड़बड़ है, तो सही है।</li>
+            <li><strong>सेक्स को प्यार की परीक्षा बनाने वाली से बचें</strong></li>
+            <li><strong>गिफ्ट या रुपया देने से पहले सोचें – क्या वह उतना ही देती है?</strong></li>
+        </ul>
+        <div class="safetytip">🛡️ मुख्य मंत्र: “प्यार करो, लेकिन सुरक्षित रहो।”</div>
+        <div class="page-number">पृष्ठ 131-155</div>
+    </div>
+
+    <!-- अध्याय 8 -->
+    <div class="chapter" id="ch8">
+        <h2>8. मानसिक मजबूती – आत्मरक्षा की नींव</h2>
+        <p>ब्रेकअप के बाद डिप्रेशन, आत्महत्या के विचार, आत्मसम्मान का गिरना – ये सब होता है। लेकिन जीतना सीखिए।</p>
+        <ul>
+            <li><strong>ध्यान और प्राणायाम</strong> – प्रतिदिन 20 मिनट से मन शांत होगा।</li>
+            <li><strong>ब्रह्मचर्य का पालन</strong> – ऊर्जा बचाए रखता है और मानसिक भ्रम नहीं होता।</li>
+            <li><strong>जर्नलिंग</strong> – लिखिए कि उस रिश्ते में क्या गलत हुआ, सीखें।</li>
+            <li><strong>परिवार और मित्रों का साथ</strong> – दुख को बाँटिए, छिपाइए मत।</li>
+            <li><strong>प्रोफेशनल हेल्प</strong> – यदि अत्यधिक तनाव हो, तो काउंसलर से मिलें।</li>
+        </ul>
+        <div class="page-number">पृष्ठ 156-175</div>
+    </div>
+
+    <!-- अध्याय 9 – केस स्टडी -->
+    <div class="chapter" id="ch9">
+        <h2>9. रियल केस स्टडीज (5 सच्ची कहानियाँ)</h2>
+        <div class="casestudy"><strong>📌 केस 1 – राहुल (इंजीनियरिंग छात्र)</strong><br>झूठी प्रेग्नेंसी का झांसा देकर 1.5 लाख रुपए लिए, फिर गायब। सीख: बिना डॉक्टर से कन्फर्म किए पैसे न दें।</div>
+        <div class="casestudy"><strong>📌 केस 2 – नितिन (कॉर्पोरेट)</strong><br>एक साथ तीन लड़कों से रिलेशनशिप चला रही थी। सीख: लगातार कॉल न उठाना रेड फ्लैग है।</div>
+        <div class="casestudy"><strong>📌 केस 3 – अमन (जैन समाज)</strong><br>शादी का वादा, 1 साल शारीरिक संबंध, फिर “परिवार नहीं मानेगा” कहकर छोड़ दिया। सीख: जब तक घरवालों से मिलवा न दे, विश्वास न करें।</div>
+        <div class="casestudy"><strong>📌 केस 4 – विवेक</strong><br>एक्स के साथ मिलकर धोखा, फिर लौटी, फिर से धोखा। सीख: एक बार छोड़ने वाली दोबारा छोड़ेगी।</div>
+        <div class="casestudy"><strong>📌 केस 5 – सूरज</strong><br>इंस्टाग्राम फॉलोअर्स के लिए प्रेम का नाटक, 10k फॉलोअर्स होते ही ब्लॉक। सीख: सोशल मीडिया के लिए इस्तेमाल न बनें।</div>
+        <div class="page-number">पृष्ठ 176-200</div>
+    </div>
+
+    <!-- अध्याय 10 – निष्कर्ष -->
+    <div class="chapter" id="ch10">
+        <h2>10. निष्कर्ष – सही प्यार की पहचान</h2>
+        <p>सच्चा प्यार कभी आधे रास्ते नहीं छोड़ता। वह आपके सुख-दुख में खड़ा रहता है, आपको कमजोर नहीं, मजबूत बनाता है। यदि कोई लड़की आपको मानसिक शांति नहीं दे रही, केवल उलझन दे रही है – तो वह प्रेम नहीं, जाल है। आपकी असली पहचान आपका आत्मसम्मान है। प्यार की भीख माँगने से बेहतर है अकेले रहना।</p>
+        <p><strong>Bibek Patra का संदेश –</strong> इस पुस्तक के नियमों को अपनाएँ, अपने मित्रों के साथ साझा करें। “हर इंसान अच्छा नहीं होता, लेकिन हर इंसान को मौका दिया जा सकता है – परीक्षा के बाद।”</p>
+        <div class="page-number">पृष्ठ 201-215</div>
+    </div>
+
+    <!-- परिशिष्ट -->
+    <div class="chapter" id="appendix">
+        <h2>परिशिष्ट – सहायता संसाधन</h2>
+        <p><strong>24x7 हेल्पलाइन (भारत)</strong><br>iCall (TISS): 022-25521111 (मानसिक स्वास्थ्य परामर्श)<br>मानसिक सहायता वेबसाइट: <a href="#" style="color:#b45a1c;">https://surakshitpyar.in/helpline</a> (काल्पनिक)</p>
+        <p><strong>सुझाई गई पुस्तकें:</strong><br>– ‘दि गिफ्ट ऑफ फियर’ – गैविन डी बेकर<br>– ‘अटैचमेंट’ – डॉ. अमीर लेविन</p>
+        <p><strong>प्रश्नोत्तरी:</strong> उपरोक्त 20 रेड फ्लैग में से जितने अधिक मिलें, उतना जोखिम। 10+ मतलब तुरंत दूरी बनाएँ।</p>
+        <p><em>लेखक का हार्दिक आभार – इस पुस्तक को हर उस युवक तक पहुँचाएँ जो प्रेम में धोखा खा सकता है।</em></p>
+        <div class="page-number">पृष्ठ 216-225</div>
+    </div>
+
+    <footer>
+        ✍️ लेखक : Bibek Patra | © सुरक्षित प्यार अभियान 2026<br>
+        यह पुस्तक मुफ्त वितरण हेतु है – जागरूकता ही सुरक्षा है।
+    </footer>
+</div>
+
+<button class="btn-up" id="goTopBtn">📖 ऊपर जाएँ</button>
+<script>
+    document.getElementById('goTopBtn').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
+</body>
+</html>
